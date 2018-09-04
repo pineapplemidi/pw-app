@@ -9,6 +9,7 @@ import styles from './Styles/LaunchScreenStyles'
 
 let selected = 'rgba(92, 99, 216, 1)'
 let unselected = 'rgba(0, 99, 0, 0)'
+let text = 'Artist: {string} - Song: {string} - '
 
 export default class Browser extends Component {
   constructor (props) {
@@ -32,6 +33,16 @@ export default class Browser extends Component {
     }
   };
 
+  addButton = () => {
+    this.state.buttons.push(this.state.buttons.length)
+  }
+
+  deleteButton = (index) => {
+    this.state.buttons = this.state.buttons.filter(m => {
+      return m !== index
+    })
+  }
+
   render () {
     return (
       <View style={styles.mainContainer}>
@@ -46,10 +57,10 @@ export default class Browser extends Component {
                 borderRadius: 5,
                 marginTop: 5,
                 height: 100,
-                backgroundColor: this.isSelected(index)
+                backgroundColor: this.isSelected(button)
               }}
-              title='Artist: {string} - Song: {string}'
-              onPress={() => this.buttonSelect(index)} />
+              title={text.concat(button)}
+              onPress={() => this.buttonSelect(button)} />
           ))}
           <DevscreensButton />
         </ScrollView>
