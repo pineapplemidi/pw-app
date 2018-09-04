@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import { ScrollView, View } from 'react-native'
-import { Button } from 'react-native-elements'
+import { ScrollView, Text, View } from 'react-native'
+import { Button, Slider } from 'react-native-elements'
 import DevscreensButton from '../../ignite/DevScreens/DevscreensButton.js'
 
 import styles from './Styles/LaunchScreenStyles'
+import {Fonts} from '../Themes'
 
 let selected = '#323232'
 let unselected = 'rgba(0, 99, 0, 0)'
 let text = 'Artist: {string} - Song: {string} - '
 
-let uiState = {buttonHeight: 100, height: '%100', width: 100}
+let uiState = {buttonHeight: 80, height: '%100', width: 100}
 
 export default class Browser extends Component {
   constructor (props) {
@@ -57,14 +58,38 @@ export default class Browser extends Component {
                 backgroundColor: this.getButtonSelected(button),
                 borderWidth: this.state.borderWidth,
                 borderRadius: 5,
+                fontFamily: Fonts.type.base,
                 height: uiState.buttonHeight,
                 marginTop: 5
               }}
               title={text.concat(button)}
-              onPress={() => this.selectButton(button)} />
+              onPress={() => this.selectButton(button)}
+            />
           ))}
           <DevscreensButton />
         </ScrollView>
+        <Slider
+          style={{
+            backgroundColor: '#323232'
+          }}
+          thumbStyle={{
+            backgroundColor: '#323232',
+            borderColor: 'rgba(150, 150, 150, 0.6)',
+            borderWidth: 2,
+            borderRadius: 5,
+            height: 40,
+            width: 10
+          }} />
+        <Text style={{
+          backgroundColor: '#323232',
+          color: 'white',
+          fontSize: 20,
+          fontFamily: Fonts.type.base,
+          height: 40,
+          textAlign: 'center'
+        }} >
+          {text.concat(this.state.selected)}
+        </Text>
       </View>
     )
   }
